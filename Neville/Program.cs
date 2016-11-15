@@ -101,13 +101,6 @@ namespace Neville
                 }
                 iloscWierszy--;
             }
-
-            //Console.WriteLine(P[0, 0]);
-            //Console.WriteLine(P[1, 0]);
-            //Console.WriteLine(P[2, 0]);
-            //Console.WriteLine(P[0, 1]);
-            //Console.WriteLine(P[1, 1]);
-            //Console.WriteLine(P[0, 2]);
             Console.ReadKey();
 
         }
