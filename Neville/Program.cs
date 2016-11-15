@@ -27,10 +27,25 @@ namespace Neville
                 double y;
                 for(int i = 0; i < iloscArg; i++)
                 {
-                    Console.WriteLine("Podaj x" + i + ":");
-                    x = Convert.ToDouble(Console.ReadLine());
-                    Console.WriteLine("Podaj y" + i + ":");
-                    y = Convert.ToDouble(Console.ReadLine());
+                    while(true)
+                    {
+                        Console.WriteLine("Podaj x" + i + ":");
+                        if(Double.TryParse(Console.ReadLine(), out x))
+                        {
+                            break;
+                        }
+                        Console.WriteLine("Nieprawidlowa wartosc x" + i);
+                    }
+
+                    while(true)
+                    {
+                        Console.WriteLine("Podaj y" + i + ":");
+                        if (Double.TryParse(Console.ReadLine(), out y))
+                        {
+                            break;
+                        }
+                        Console.WriteLine("Nieprawidlowa wartosc y" + i);
+                    }
                     tabela.Add(x, y);
                 }
             }
@@ -60,7 +75,6 @@ namespace Neville
                     for (int i = 0; i < iloscWierszy; i++)
                     {
                         P[i,k] = Oblicz("((x-"+DajXi(i)+")*("+P[i+1,k-1]+")-(x-"+DajXi(i+k)+")*("+P[i,k-1]+"))/("+DajXi(i+k)+"-"+DajXi(i)+")");
-                        //P[i, k] = Oblicz("(x - " +DajXi(i)+ ")");
                     }
                     iloscWierszy--;
                 }
@@ -85,13 +99,23 @@ namespace Neville
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Podaj ilosc argumentow:");
-            Dane dane = new Dane(Convert.ToInt32(Console.ReadLine()));
+            int iloscArg;
+
+            while(true)
+            {
+                Console.WriteLine("Podaj ilosc argumentow:");
+                if (Int32.TryParse(Console.ReadLine(), out iloscArg))
+                {
+                    break;
+                }
+                Console.WriteLine("Ilosc argumentow musi byc liczba calkowita");
+            }
+
+            Dane dane = new Dane(iloscArg);
             dane.PobierzDane();
 
             string[,] P = Obliczenia.AlgorytmNevillea(dane);
-
-            int iloscArg = dane.iloscArg;
+            
             int iloscWierszy = iloscArg;
             for (int k = 0; k < iloscArg; k++)
             {
@@ -102,7 +126,6 @@ namespace Neville
                 iloscWierszy--;
             }
             Console.ReadKey();
-
         }
     }
 }
